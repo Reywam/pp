@@ -37,10 +37,19 @@ Point GenerateRandomPoint(size_t squareSize)
 	return Point(GenerateRandomDouble(min, max), GenerateRandomDouble(min, max));
 }
 
-void GeneratePoints(size_t &pointsInCircle, const size_t &iterationsCount, mutex &mtx) {
-	for (size_t i = 0; i < iterationsCount; i++)
+void GeneratePoints(size_t &pointsInCircle, 
+	const size_t &iterationsCount, 
+	mutex &mtx,
+	size_t &count) {
+	for (; count < iterationsCount;)
 	{
 		std::lock_guard<std::mutex> lock(mtx);
+		count++;
+		if (count > iterationsCount) {
+			break;
+		}
+		
+		cout << count << "/" << iterationsCount << endl;		
 		Point point = GenerateRandomPoint(SQUARE_SIDE);
 		if (point.x * point.x + point.y * point.y <= R)
 		{
@@ -53,12 +62,13 @@ vector<thread> InitThreads(
 	const size_t &threadsCount, 
 	size_t &pointsInCircle,
 	const size_t &itersForThread,
-	mutex &mtx)
+	mutex &mtx,
+	size_t &count)
 {
 	vector<thread> threads;
 	for (size_t i = 0; i < threadsCount; i++)
 	{
-		threads.push_back(thread(GeneratePoints, ref(pointsInCircle), ref(itersForThread), ref(mtx)));
+		threads.push_back(thread(GeneratePoints, ref(pointsInCircle), ref(itersForThread), ref(mtx), ref(count)));
 	}
 	return threads;
 }
@@ -82,17 +92,16 @@ int main(int argc, char *argv[])
 	clock_t start = clock();
 	
 	size_t iterationsCount = atoi(argv[1]);	
-	size_t threadsCount = atoi(argv[2]);	
-	size_t itersForThread = iterationsCount / threadsCount;
-
+	size_t threadsCount = atoi(argv[2]);		
 	size_t pointsInCircle = 0;	
 
 	mutex mtx;
-	vector<thread> threads = InitThreads(threadsCount, pointsInCircle, itersForThread, mtx);	
+	size_t count = 0;	
+	vector<thread> threads = InitThreads(threadsCount, pointsInCircle, iterationsCount, mtx, count);
 	StartThreadsEndWaiting(threads);
 
 	double pi = multCoeff * pointsInCircle / iterationsCount;
-	cout << pi << endl;
+	cout << "Pi: " << pi << endl;
 
 	clock_t end = clock();
 
