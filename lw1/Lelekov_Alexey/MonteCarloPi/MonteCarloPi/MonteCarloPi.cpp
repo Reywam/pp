@@ -16,8 +16,10 @@ const double multCoeff = 4;
 
 using namespace std;
 
-struct Point {
-	Point(double x, double y) {
+struct Point 
+{
+	Point(double x, double y) 
+	{
 		this->x = x;
 		this->y = y;
 	}
@@ -40,12 +42,14 @@ Point GenerateRandomPoint(size_t squareSize)
 void GeneratePoints(size_t &pointsInCircle, 
 	const size_t &iterationsCount, 
 	mutex &mtx,
-	size_t &count) {
+	size_t &count) 
+{
 	for (; count < iterationsCount;)
 	{
 		std::lock_guard<std::mutex> lock(mtx);
 		count++;
-		if (count > iterationsCount) {
+		if (count > iterationsCount)
+		{
 			break;
 		}
 		
@@ -83,7 +87,8 @@ void StartThreadsEndWaiting(vector<thread> &threads)
 
 int main(int argc, char *argv[])
 {		
-	if (argc != ARGS_COUNT) {
+	if (argc != ARGS_COUNT) 
+	{
 		cout << "Invalid count of arguements." << endl;
 		cout << "Use: MonteCarloPi.exe <iterationsCount> <threadsCount>." << endl;
 		return 1;
