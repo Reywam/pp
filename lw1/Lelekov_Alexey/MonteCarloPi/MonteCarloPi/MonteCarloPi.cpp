@@ -1,11 +1,4 @@
 #include "stdafx.h"
-#include <iostream>
-#include <vector>
-#include <string>
-#include <time.h>
-
-#include <thread>
-#include <mutex>
 
 const size_t ARGS_COUNT = 3;
 
@@ -77,7 +70,7 @@ vector<thread> InitThreads(
 	return threads;
 }
 
-void StartThreadsEndWaiting(vector<thread> &threads) 
+void StartWaitingForThreadsEnd(vector<thread> &threads) 
 {
 	for (auto &thread : threads)
 	{
@@ -101,9 +94,9 @@ int main(int argc, char *argv[])
 	size_t pointsInCircle = 0;	
 
 	mutex mtx;
-	size_t count = 0;	
+	size_t count = 0;
 	vector<thread> threads = InitThreads(threadsCount, pointsInCircle, iterationsCount, mtx, count);
-	StartThreadsEndWaiting(threads);
+	StartWaitingForThreadsEnd(threads);
 
 	double pi = multCoeff * pointsInCircle / iterationsCount;
 	cout << "Pi: " << pi << endl;
