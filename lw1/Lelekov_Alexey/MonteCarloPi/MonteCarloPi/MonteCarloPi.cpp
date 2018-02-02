@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <string>
+#include <time.h>
 
 const size_t ARGS_COUNT = 3;
 
@@ -34,6 +35,10 @@ Point GenerateRandomPoint(size_t squareSize)
 
 int main(int argc, char *argv[])
 {
+	clock_t start;
+	clock_t end;
+
+	start = clock();
 	if (argc != ARGS_COUNT) {
 		cout << "Invalid count of arguements." << endl;
 		cout<< "Use: MonteCarloPi.exe <iterationsCount> <threadsCount>." << endl;
@@ -56,6 +61,9 @@ int main(int argc, char *argv[])
 
 	double pi = multCoeff * pointsInCircle / iterationsCount;
 	cout << pi << endl;
+	end = clock();
 
+	float duration = (float)(end - start) / CLOCKS_PER_SEC;
+	cout << "Time: " << duration << endl;
     return 0;
 }
