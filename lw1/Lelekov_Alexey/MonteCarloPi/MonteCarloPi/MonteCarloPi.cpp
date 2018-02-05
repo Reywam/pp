@@ -13,12 +13,12 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	clock_t start = clock();
-	
-	size_t iterationsCount = atoi(argv[1]);	
-	size_t threadsCount = atoi(argv[2]);		
+	size_t iterationsCount = atoi(argv[1]);
+	size_t threadsCount = atoi(argv[2]);
 	size_t count = 0;
 
+	clock_t start = clock();
+	
 	MonteCarlo algorithm;	
 	algorithm.Run(iterationsCount, count);
 	cout << algorithm.GetResult() << endl;	
