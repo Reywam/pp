@@ -5,8 +5,8 @@
 MonteCarlo::MonteCarlo(const size_t &itersCount)
 {
 	if (itersCount >= 0) 
-	{
-		this->itersCount = itersCount;
+	{		
+		this->iterCount = itersCount;
 	}
 }
 
@@ -15,15 +15,15 @@ DWORD WINAPI MonteCarlo::Run(LPVOID t)
 	static size_t count = 0;
 	Randomizer rand;
 	size_t pointsInCircle = 0;
-	for (; count <  itersCount;)
+	for (; count <  iterCount;)
 	{		
 		count++;
-		if (count > this->itersCount)
+		if (count > this->iterCount)
 		{
 			break;
 		}
 
-		std::cout << count << "/" << this->itersCount << std::endl;
+		std::cout << count << "/" << this->iterCount << std::endl;
 		Point point = rand.GenerateRandomPoint(SQUARE_SIDE);
 		double x = point.GetX();
 		double y = point.GetY();
@@ -33,7 +33,7 @@ DWORD WINAPI MonteCarlo::Run(LPVOID t)
 		}
 	}
 
-	result = MULT_COEFF * pointsInCircle / this->itersCount;
+	result = MULT_COEFF * pointsInCircle / this->iterCount;
 
 	return 0;
 }

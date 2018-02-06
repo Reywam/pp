@@ -5,7 +5,6 @@ class MultithreadedMonteCarlo :
 {
 public:
 	MultithreadedMonteCarlo(const size_t &itersCount);
-	void 
-Run(const size_t &threadsCount);
+	void Run(const size_t &threadsCount);
 	~MultithreadedMonteCarlo();
 };

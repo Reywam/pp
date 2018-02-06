@@ -13,7 +13,7 @@ void ThreadHandler::Add(LPTHREAD_START_ROUTINE threadProc)
 
 void ThreadHandler::JoinAll()
 {
-	WaitForMultipleObjects(threads.size(), threads.data, true, INFINITE);
+	WaitForMultipleObjects(threads.size(), threads.data(), true, INFINITE);
 }
 
 ThreadHandler::~ThreadHandler()
