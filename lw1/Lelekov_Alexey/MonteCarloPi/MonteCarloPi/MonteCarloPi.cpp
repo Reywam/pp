@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {		
-	if (argc != ARGS_COUNT) 
+	if (argc != ARGS_COUNT)
 	{
 		cout << "Invalid count of arguements." << endl;
 		cout << "Use: MonteCarloPi.exe <iterationsCount> <threadsCount>." << endl;
@@ -19,8 +19,9 @@ int main(int argc, char *argv[])
 
 	clock_t start = clock();
 	
-	MonteCarlo algorithm;	
-	algorithm.Run(iterationsCount, count);
+	/*MonteCarlo algorithm(iterationsCount);*/
+	MultithreadedMonteCarlo algorithm(iterationsCount);
+	algorithm.Run(threadsCount);	
 	cout << algorithm.GetResult() << endl;	
 
 	clock_t end = clock();

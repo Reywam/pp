@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonteCarlo.h" />
+    <ClInclude Include="MultithreadedMonteCarlo.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="stdafx.h" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="MonteCarlo.cpp" />
     <ClCompile Include="MonteCarloPi.cpp" />
+    <ClCompile Include="MultithreadedMonteCarlo.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="stdafx.cpp">
