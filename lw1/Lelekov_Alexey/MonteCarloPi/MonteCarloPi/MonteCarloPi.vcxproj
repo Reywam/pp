@@ -146,8 +146,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Counter.h" />
     <ClInclude Include="MonteCarlo.h" />
-    <ClInclude Include="MultithreadedMonteCarlo.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="stdafx.h" />
@@ -155,9 +155,9 @@
     <ClInclude Include="ThreadHandler.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Counter.cpp" />
     <ClCompile Include="MonteCarlo.cpp" />
-    <ClCompile Include="MonteCarloPi.cpp" />
-    <ClCompile Include="MultithreadedMonteCarlo.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="stdafx.cpp">

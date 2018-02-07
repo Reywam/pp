@@ -9,4 +9,3 @@
 #include <string>
 #include <time.h>
 #include "MonteCarlo.h"
-#include "MultithreadedMonteCarlo.h"

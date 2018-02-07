@@ -1,41 +1,56 @@
 #include "stdafx.h"
 #include "MonteCarlo.h"
-#include "Windows.h"
 
-MonteCarlo::MonteCarlo(const size_t &itersCount)
-{
-	if (itersCount >= 0) 
-	{		
-		this->iterCount = itersCount;
-	}
-}
-
-DWORD WINAPI MonteCarlo::Run(LPVOID t)
-{	
-	static size_t count = 0;
+DWORD WINAPI GeneratePointsInCircle(LPVOID param)
+{			
+	ThreadInfo *info = (ThreadInfo*)(param);
 	Randomizer rand;
-	size_t pointsInCircle = 0;
-	for (; count <  iterCount;)
+	const size_t iterCount = info->iterCount;
+	for (; Counter::GetCount() < iterCount;)
 	{		
-		count++;
-		if (count > this->iterCount)
+		Counter::IncCount();		
+		if (Counter::GetCount() > iterCount)
 		{
 			break;
 		}
 
-		std::cout << count << "/" << this->iterCount << std::endl;
+		std::cout << Counter::GetCount() << "/" << iterCount << std::endl;
 		Point point = rand.GenerateRandomPoint(SQUARE_SIDE);
 		double x = point.GetX();
 		double y = point.GetY();
 		if (x * x + y * y <= R)
 		{
-			pointsInCircle++;
+			Counter::IncPoint();
 		}
 	}
-
-	result = MULT_COEFF * pointsInCircle / this->iterCount;
-
 	return 0;
+}
+
+MonteCarlo::MonteCarlo(const size_t &itersCount)
+{
+	if (itersCount >= 0) 
+	{		
+		iterCount = itersCount;
+	}
+}
+
+void MonteCarlo::Run(size_t threadsCount)
+{
+	ThreadHandler handler;
+	if (threadsCount > 1) {		
+		for (size_t i = 1; i < threadsCount; i++)
+		{
+			handler.Add(GeneratePointsInCircle, &iterCount);
+		}		
+	}
+
+	if (!handler.empty()) {
+		handler.JoinAll();
+	}
+
+	//ThreadInfo info(iterCount);
+	GeneratePointsInCircle(&iterCount);
+	result = MULT_COEFF * Counter::GetPoints() / iterCount;	
 }
 
 double MonteCarlo::GetResult()
