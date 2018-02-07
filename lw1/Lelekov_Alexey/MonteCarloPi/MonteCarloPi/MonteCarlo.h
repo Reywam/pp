@@ -11,15 +11,6 @@ const double MULT_COEFF = 4;
 
 DWORD WINAPI GeneratePointsInCircle(LPVOID param);
 
-struct ThreadInfo
-{
-	ThreadInfo(size_t iterCount)
-	{
-		this->iterCount = iterCount;		
-	}
-	size_t iterCount;
-};
-
 class MonteCarlo
 {
 public:	

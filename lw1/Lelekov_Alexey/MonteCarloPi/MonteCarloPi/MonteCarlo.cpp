@@ -2,10 +2,10 @@
 #include "MonteCarlo.h"
 
 DWORD WINAPI GeneratePointsInCircle(LPVOID param)
-{			
-	ThreadInfo *info = (ThreadInfo*)(param);
+{				
+	size_t *info = (size_t*)(param);
 	Randomizer rand;
-	const size_t iterCount = info->iterCount;
+	const size_t iterCount = *info;
 	for (; Counter::GetCount() < iterCount;)
 	{		
 		Counter::IncCount();		
@@ -47,8 +47,7 @@ void MonteCarlo::Run(size_t threadsCount)
 	if (!handler.empty()) {
 		handler.JoinAll();
 	}
-
-	//ThreadInfo info(iterCount);
+	
 	GeneratePointsInCircle(&iterCount);
 	result = MULT_COEFF * Counter::GetPoints() / iterCount;	
 }
