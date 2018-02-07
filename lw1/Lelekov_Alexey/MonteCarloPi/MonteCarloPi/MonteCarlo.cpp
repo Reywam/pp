@@ -42,11 +42,8 @@ void MonteCarlo::Run(size_t threadsCount)
 		{
 			handler.Add(GeneratePointsInCircle, &iterCount);
 		}		
-	}
-
-	if (!handler.empty()) {
 		handler.JoinAll();
-	}
+	}	
 	
 	GeneratePointsInCircle(&iterCount);
 	result = MULT_COEFF * Counter::GetPoints() / iterCount;	
