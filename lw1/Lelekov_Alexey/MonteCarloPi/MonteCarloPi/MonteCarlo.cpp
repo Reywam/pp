@@ -14,7 +14,10 @@ DWORD WINAPI GeneratePointsInCircle(LPVOID param)
 			break;
 		}
 
-		std::cout << Counter::GetCount() << "/" << iterCount << std::endl;
+		std::string progress = std::to_string(Counter::GetCount()) + "/" + std::to_string(iterCount);
+		Messenger::PrintMessage(std::cout, progress);
+
+		//std::cout << Counter::GetCount() << "/" << iterCount << std::endl;
 		Point point = rand.GenerateRandomPoint(SQUARE_SIDE);
 		double x = point.GetX();
 		double y = point.GetY();

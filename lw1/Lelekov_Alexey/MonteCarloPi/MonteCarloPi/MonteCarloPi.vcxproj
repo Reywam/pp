@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Counter.h" />
+    <ClInclude Include="Messenger.h" />
     <ClInclude Include="MonteCarlo.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Randomizer.h" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Counter.cpp" />
+    <ClCompile Include="Messenger.cpp" />
     <ClCompile Include="MonteCarlo.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point.cpp" />

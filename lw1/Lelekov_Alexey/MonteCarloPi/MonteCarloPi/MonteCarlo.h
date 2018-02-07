@@ -4,6 +4,8 @@
 #include <Windows.h>
 #include "Counter.h"
 #include "ThreadHandler.h"
+#include "Messenger.h"
+#include <iostream>
 
 const size_t R = 1;
 const size_t SQUARE_SIDE = 2;
