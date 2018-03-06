@@ -3,16 +3,16 @@
 const size_t ARGS_COUNT = 3;
 
 int main(int argc, char *argv[])
-{			
+{
 	if (argc == 2 && std::string(argv[1]) == "--help")
-	{				
+	{
 		std::cout << argv[1] << std::endl;
 		Messenger::PrintHelpMsg(std::cout);
 		return 1;
 	}
 
 	if (argc != ARGS_COUNT)
-	{		
+	{
 		Messenger::PrintErrorMsg(std::cout);
 		return 1;
 	}

@@ -2,13 +2,13 @@
 #include "MonteCarlo.h"
 
 DWORD WINAPI GeneratePointsInCircle(LPVOID param)
-{				
+{
 	size_t *info = (size_t*)(param);
 	Randomizer rand;
 	const size_t iterCount = *info;
 	for (; Counter::GetCount() < iterCount;)
-	{		
-		Counter::IncCount();		
+	{
+		Counter::IncCount();
 		if (Counter::GetCount() > iterCount)
 		{
 			break;
@@ -16,7 +16,7 @@ DWORD WINAPI GeneratePointsInCircle(LPVOID param)
 
 		std::string progress = std::to_string(Counter::GetCount()) + "/" + std::to_string(iterCount);
 		Messenger::PrintMessage(std::cout, progress);
-		
+
 		Point point = rand.GenerateRandomPoint(SQUARE_SIDE);
 		double x = point.GetX();
 		double y = point.GetY();
@@ -31,7 +31,7 @@ DWORD WINAPI GeneratePointsInCircle(LPVOID param)
 MonteCarlo::MonteCarlo(const size_t &itersCount)
 {
 	if (itersCount >= 0) 
-	{		
+	{
 		iterCount = itersCount;
 	}
 }
@@ -39,16 +39,16 @@ MonteCarlo::MonteCarlo(const size_t &itersCount)
 void MonteCarlo::Run(size_t threadsCount)
 {
 	ThreadHandler handler;
-	if (threadsCount > 1) {		
+	if (threadsCount > 1) {
 		for (size_t i = 1; i < threadsCount; i++)
 		{
 			handler.Add(GeneratePointsInCircle, &iterCount);
-		}		
+		}
 		handler.JoinAll();
-	}	
-	
+	}
+
 	GeneratePointsInCircle(&iterCount);
-	result = MULT_COEFF * Counter::GetPoints() / iterCount;	
+	result = MULT_COEFF * Counter::GetPoints() / iterCount;
 }
 
 double MonteCarlo::GetResult()

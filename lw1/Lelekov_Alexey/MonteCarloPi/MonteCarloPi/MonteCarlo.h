@@ -15,12 +15,12 @@ DWORD WINAPI GeneratePointsInCircle(LPVOID param);
 
 class MonteCarlo
 {
-public:	
+public:
 	MonteCarlo(const size_t &itersCount);
 	void Run(size_t threadsCount);
 	double GetResult();
 	~MonteCarlo();
-private:	
+private:
 	size_t iterCount;
 	double result = 0;
 };
