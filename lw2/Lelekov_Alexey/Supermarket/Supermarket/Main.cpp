@@ -5,6 +5,7 @@
 #include "Cashier.h"
 #include "ThreadHandler.h"
 #include "Starter.h"
+#include "Messenger.h"
 
 using namespace std;
 
@@ -22,6 +23,8 @@ int main(int argc, char* argv[])
 	handler.Add(Starter::Execute, &first);
 	handler.Add(Starter::Execute, &second);	
 
+	Messenger &messenger = Messenger::GetInstanse();
+
 	for (size_t i = 0; i < customersCount; i++)
 	{
 		Customer customer;
@@ -33,9 +36,8 @@ int main(int argc, char* argv[])
 		else
 		{
 			second.AddCustomerInQueue(customer);
-		}
-	}
-
+		}		
+	}	
 	handler.JoinAll();
 
     return 0;

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Cashier.h"
-#include <Windows.h>
-#include <iostream>
-#include <string>
+#include "Messenger.h"
 
 Cashier::Cashier(const size_t &number)
 {
@@ -12,7 +10,7 @@ Cashier::Cashier(const size_t &number)
 
 void Cashier::ServeCustomer()
 {
-	std::cout << "Customer served in cashdesk: " + std::to_string(number) << std::endl;
+	Messenger::GetInstanse().SendMessageTo(std::cout, "Customer served in cashdesk: " + std::to_string(number) + '\n');	
 	queue.pop();
 }
 
@@ -22,7 +20,7 @@ void Cashier::ServeCustomers()
 	{	
 		if (queue.empty())
 		{
-			std::cout << "Cashier No: " + std::to_string(number) + " is sleeping now" << std::endl;
+			Messenger::GetInstanse().SendMessageTo(std::cout, "Cashier No: " + std::to_string(number) + " is sleeping now" + '\n');
 		}
 		WaitForSingleObject(semaphore, INFINITE);
 		ServeCustomer();
@@ -31,7 +29,7 @@ void Cashier::ServeCustomers()
 
 void Cashier::AddCustomerInQueue(const Customer &customer)
 {	
-	std::cout << "New customer arrived on cashdesk No: " + std::to_string(number) << std::endl;
+	Messenger::GetInstanse().SendMessageTo(std::cout, "New customer arrived on cashdesk No: " + std::to_string(number) + '\n');	
 	queue.push(customer);	
 	ReleaseSemaphore(semaphore, 1, NULL);
 }
