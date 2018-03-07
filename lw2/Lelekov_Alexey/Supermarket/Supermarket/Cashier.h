@@ -10,9 +10,11 @@ public:
 	void ServeCustomer();
 	void ServeCustomers();
 	void AddCustomerInQueue(const Customer &customer);
+	void StopWorking();
 	~Cashier();
 private:
 	HANDLE semaphore;
 	std::queue<Customer> queue;
 	size_t number;
+	bool isWorking = true;
 };

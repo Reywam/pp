@@ -7,7 +7,8 @@ class ThreadHandler
 public:
 	ThreadHandler();
 	void Add(LPTHREAD_START_ROUTINE threadProc, LPVOID param);
-	void JoinAll();
+	void WaitAll();
+	void TerminateAll();
 	~ThreadHandler();
 private:
 	std::vector<HANDLE> threads;

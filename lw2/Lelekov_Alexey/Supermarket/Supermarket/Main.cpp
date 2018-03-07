@@ -1,17 +1,6 @@
 #include "stdafx.h"
-#include <string>
-#include <iostream>
-#include "Customer.h"
-#include "Cashier.h"
-#include "ThreadHandler.h"
-#include "Starter.h"
-#include "Messenger.h"
 
 using namespace std;
-
-void kek() {
-
-}
 
 int main(int argc, char* argv[])
 {	
@@ -38,7 +27,10 @@ int main(int argc, char* argv[])
 			second.AddCustomerInQueue(customer);
 		}		
 	}	
-	handler.JoinAll();
+	
+	first.StopWorking();
+	second.StopWorking();
+	handler.WaitAll();
 
     return 0;
 }
