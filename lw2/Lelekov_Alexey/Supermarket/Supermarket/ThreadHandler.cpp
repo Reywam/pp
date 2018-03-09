@@ -16,10 +16,10 @@ void ThreadHandler::WaitAll()
 }
 
 void ThreadHandler::TerminateAll()
-{	
+{
 	for (size_t i = 0; i < threads.size(); i++)
 	{
-		TerminateThread(threads[i], 0);		
+		TerminateThread(threads[i], 0);
 	}
 }
 

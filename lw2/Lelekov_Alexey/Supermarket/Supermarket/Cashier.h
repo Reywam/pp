@@ -9,7 +9,7 @@ public:
 	Cashier(const size_t &number);
 	void ServeCustomer();
 	void ServeCustomers();
-	void AddCustomerInQueue(const Customer &customer);
+	void AddCustomerInQueue(Customer &customer);
 	void StopWorking();
 	~Cashier();
 private:

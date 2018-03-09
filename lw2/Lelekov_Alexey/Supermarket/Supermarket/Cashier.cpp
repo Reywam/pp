@@ -5,19 +5,23 @@
 Cashier::Cashier(const size_t &number)
 {
 	this->number = number;
-	semaphore = CreateSemaphore(NULL, 0, 50, NULL);	
+	semaphore = CreateSemaphore(NULL, 0, 50, NULL);
 }
 
 void Cashier::ServeCustomer()
 {
-	Messenger::GetInstanse().SendMessageTo(std::cout, "Customer served in cashdesk: " + std::to_string(number) + '\n');	
+	auto customer = queue.front();
+	customer.Wakeup();
+	WaitForSingleObject(customer.IsWakedUp(), INFINITE);
+	std::string msg = "Customer No: " + std::to_string(customer.GetNumber()) + " served in cashdesk: " + std::to_string(number) + '\n';
+	Messenger::GetInstanse().SendMessageTo(std::cout, msg);
 	queue.pop();
 }
 
 void Cashier::ServeCustomers()
 {
 	while (true)
-	{	
+	{
 		if (!isWorking && queue.empty())
 		{
 			break;
@@ -33,10 +37,11 @@ void Cashier::ServeCustomers()
 	}
 }
 
-void Cashier::AddCustomerInQueue(const Customer &customer)
-{	
-	Messenger::GetInstanse().SendMessageTo(std::cout, "New customer arrived on cashdesk No: " + std::to_string(number) + '\n');	
-	queue.push(customer);	
+void Cashier::AddCustomerInQueue(Customer &customer)
+{
+	std::string msg = "New customer " + std::to_string(customer.GetNumber()) + " arrived on cashdesk No: " + std::to_string(number) + '\n';
+	Messenger::GetInstanse().SendMessageTo(std::cout, msg);
+	queue.push(customer);
 	ReleaseSemaphore(semaphore, 1, NULL);
 }
 

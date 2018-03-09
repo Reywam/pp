@@ -146,7 +146,7 @@
     <ClInclude Include="Cashier.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="Messenger.h" />
-    <ClInclude Include="Starter.h" />
+    <ClInclude Include="Executor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadHandler.h" />
@@ -155,7 +155,7 @@
     <ClCompile Include="Cashier.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="Messenger.cpp" />
-    <ClCompile Include="Starter.cpp" />
+    <ClCompile Include="Executor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -7,8 +7,8 @@ Messenger::Messenger()
 }
 
 void Messenger::SendMessageTo(std::ostream &out, const std::string &msg)
-{			
-	out << msg;	
+{
+	out << msg;
 }
 
 
