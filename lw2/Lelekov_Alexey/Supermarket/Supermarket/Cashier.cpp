@@ -12,12 +12,10 @@ void Cashier::ServeCustomer()
 {
 	auto &customer = queue.front();
 	customer->Wakeup();
-	std::string msg = "Customer No: " + std::to_string(customer->GetNumber()) + " served in cashdesk: " + std::to_string(number) + '\n';
-	Messenger::GetInstanse().AddMessageInQueue(msg);
+	std::cout << "Customer No: " + std::to_string(customer->GetNumber()) + " served in cashdesk: " + std::to_string(number) + '\n';
 
 	WaitForSingleObject(customer->ExitEvent(), INFINITE);
 	queue.pop();
-	customer->Suicide();
 }
 
 size_t Cashier::GetNumber()
@@ -36,20 +34,20 @@ void Cashier::ServeCustomers()
 
 		if (queue.empty())
 		{
-			Messenger::GetInstanse().AddMessageInQueue("Cashier No: " + std::to_string(number) + " is sleeping now\n");
+			std::cout << "Cashier No: " + std::to_string(number) + " is sleeping now\n";
 		}
 		
 		WaitForSingleObject(semaphore, INFINITE);
-		Messenger::GetInstanse().AddMessageInQueue("Cashier No: " + std::to_string(number) + " awekened\n");
+		std::cout << "Cashier No: " + std::to_string(number) + " awekened\n";
 		ServeCustomer();
 	}
-	Messenger::GetInstanse().AddMessageInQueue("Cashier No: " + std::to_string(number) + " closed cashdesk\n");
+	std::cout << "Cashdesk " + std::to_string(number) + " closed\n";
 }
 
 void Cashier::AddCustomerInQueue(std::shared_ptr<Customer> customer)
 {
 	std::string msg = "New customer " + std::to_string(customer->GetNumber()) + " arrived on cashdesk No: " + std::to_string(number) + '\n';
-	Messenger::GetInstanse().AddMessageInQueue(msg);
+	std::cout << msg;
 	queue.push(customer);
 	ReleaseSemaphore(semaphore, 1, NULL);
 }
@@ -61,6 +59,5 @@ void Cashier::StopWorking()
 
 Cashier::~Cashier()
 {
-	Messenger::GetInstanse().AddMessageInQueue(">>>>>>Closing cashier No:" + std::to_string(number) + '\n');
 	CloseHandle(semaphore);
 }

@@ -8,6 +8,7 @@ Messenger::Messenger()
 void Messenger::AddMessageInQueue(const std::string msg)
 {
 	mutex = CreateMutex(NULL, FALSE, NULL);
+	WaitForSingleObject(mutex, INFINITE);
 	queue.push(msg);
 	ReleaseMutex(mutex);
 }

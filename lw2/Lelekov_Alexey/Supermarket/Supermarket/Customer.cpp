@@ -21,7 +21,7 @@ size_t Customer::GetNumber()
 
 void Customer::WaitOnesTurn()
 {
-	Messenger::GetInstanse().AddMessageInQueue("Customer No: " + std::to_string(number) + " is sleeping now\n");
+	std::cout << "Customer No: " + std::to_string(number) + " is sleeping now\n";
 	WaitForSingleObject(wakeupEvent, INFINITE);
 	SetEvent(exitEvent);
 	ResetEvent(wakeupEvent);
@@ -30,11 +30,6 @@ void Customer::WaitOnesTurn()
 HANDLE Customer::ExitEvent()
 {
 	return exitEvent;
-}
-
-void Customer::Suicide()
-{
-	SetEvent(suicideEvent);
 }
 
 Customer::~Customer()
