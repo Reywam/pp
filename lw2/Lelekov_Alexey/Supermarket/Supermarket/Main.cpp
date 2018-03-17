@@ -11,26 +11,28 @@ int main(int argc, char* argv[])
 	ThreadHandler handler;
 	handler.Add(Executor::ExecuteCashier, &first);
 	handler.Add(Executor::ExecuteCashier, &second);
+	handler.Add(Executor::ExecuteMessenger, &Messenger::GetInstanse);
 
+	vector<shared_ptr<Customer>> customers;
 	for (size_t i = 0; i < customersCount; i++)
 	{
-		Customer customer(i);
-
 		int rndRes = rand() % 2 + 1;
-		handler.Add(Executor::ExecuteCustomer, &customer);
+		auto customer = make_shared<Customer>(i);
+		customers.push_back(customer);
 		if (rndRes == 1)
 		{
-			first.AddCustomerInQueue(customer);
+			handler.Add(Executor::ExecuteCustomer, customers.back().get());
+			first.AddCustomerInQueue(customers.back());
 		}
 		else
 		{
-			second.AddCustomerInQueue(customer);
+			handler.Add(Executor::ExecuteCustomer, customers.back().get());
+			second.AddCustomerInQueue(customers.back());
 		}
 	}
-	
 	first.StopWorking();
 	second.StopWorking();
+	Messenger::GetInstanse().StopWorking();
 	handler.WaitAll();
-
 	return 0;
 }

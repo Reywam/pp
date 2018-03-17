@@ -4,12 +4,14 @@
 Customer::Customer(size_t number)
 {
 	this->number = number;
-	wakedUp = CreateEvent(NULL, FALSE, FALSE, NULL);
+	wakeupEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
+	exitEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
+	ResetEvent(wakeupEvent);
 }
 
-HANDLE Customer::IsWakedUp()
+void Customer::Wakeup()
 {
-	return wakedUp;
+	SetEvent(wakeupEvent);
 }
 
 size_t Customer::GetNumber()
@@ -19,16 +21,24 @@ size_t Customer::GetNumber()
 
 void Customer::WaitOnesTurn()
 {
-	SetEvent(wakedUp);
-	std::string msg = "Customer No: " + std::to_string(number) + " was waked up\n";
-	Messenger::GetInstanse().SendMessageTo(std::cout, msg);
+	Messenger::GetInstanse().AddMessageInQueue("Customer No: " + std::to_string(number) + " is sleeping now\n");
+	WaitForSingleObject(wakeupEvent, INFINITE);
+	SetEvent(exitEvent);
+	ResetEvent(wakeupEvent);
 }
 
-void Customer::Wakeup()
+HANDLE Customer::ExitEvent()
 {
-	SetEvent(wakedUp);
+	return exitEvent;
+}
+
+void Customer::Suicide()
+{
+	SetEvent(suicideEvent);
 }
 
 Customer::~Customer()
 {
+	CloseHandle(wakeupEvent);
+	CloseHandle(exitEvent);
 }

@@ -5,10 +5,13 @@ public:
 	Customer(size_t number);
 	void Wakeup();
 	void WaitOnesTurn();
+	void Suicide();
 	size_t GetNumber();
-	HANDLE IsWakedUp();
+	HANDLE ExitEvent();
 	~Customer();
 private:
 	size_t number;
-	HANDLE wakedUp;
+	HANDLE wakeupEvent;
+	HANDLE exitEvent;
+	HANDLE suicideEvent;
 };

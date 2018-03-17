@@ -8,6 +8,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <string>
+#include <memory>
 #include "Customer.h"
 #include "Cashier.h"
 #include "ThreadHandler.h"

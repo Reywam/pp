@@ -12,7 +12,7 @@ void ThreadHandler::Add(LPTHREAD_START_ROUTINE threadProc, LPVOID param)
 
 void ThreadHandler::WaitAll()
 {
-	WaitForMultipleObjects(threads.size(), threads.data(), true, INFINITE);
+	WaitForMultipleObjects(DWORD(threads.size()), threads.data(), true, INFINITE);
 }
 
 void ThreadHandler::TerminateAll()
