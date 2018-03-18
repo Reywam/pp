@@ -12,7 +12,6 @@ void Cashier::ServeCustomer()
 	auto &customer = queue.front();
 	customer->Wakeup();
 	std::cout << "Customer No: " + std::to_string(customer->GetNumber()) + " served in cashdesk: " + std::to_string(number) + '\n';
-
 	WaitForSingleObject(customer->ExitEvent(), INFINITE);
 	queue.pop();
 }

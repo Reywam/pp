@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Customer.h"
 
-Customer::Customer(size_t number)
+Customer::Customer(const size_t &number)
 {
 	this->number = number;
 	wakeupEvent = CreateEvent(NULL, TRUE, FALSE, NULL);

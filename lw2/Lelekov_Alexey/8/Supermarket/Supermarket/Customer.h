@@ -2,7 +2,7 @@
 class Customer
 {
 public:
-	Customer(size_t number);
+	Customer(const size_t &number);
 	void Wakeup();
 	void WaitOnesTurn();
 	size_t GetNumber();
