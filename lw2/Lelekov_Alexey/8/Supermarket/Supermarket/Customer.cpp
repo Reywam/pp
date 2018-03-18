@@ -23,7 +23,6 @@ void Customer::WaitOnesTurn()
 	std::cout << "Customer No: " + std::to_string(number) + " is sleeping now\n";
 	WaitForSingleObject(wakeupEvent, INFINITE);
 	SetEvent(exitEvent);
-	ResetEvent(wakeupEvent);
 }
 
 HANDLE Customer::IsWorkFinished()
