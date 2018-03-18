@@ -2,8 +2,16 @@
 
 using namespace std;
 
+const size_t ARGUMENTS_COUNT = 2;
+
 int main(int argc, char* argv[])
 {
+	if (argc != ARGUMENTS_COUNT)
+	{
+		cout << "Invalid argumets count. Use Supermarket.exe <count of customers>" << endl;
+		return 1;
+	}
+
 	size_t customersCount = stoi(argv[1]);
 	Cashier first(1);
 	Cashier second(2);
