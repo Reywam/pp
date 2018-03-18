@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Cashier.h"
-#include "Messenger.h"
 
 Cashier::Cashier(const size_t &number)
 {

@@ -13,4 +13,3 @@
 #include "Cashier.h"
 #include "ThreadHandler.h"
 #include "Executor.h"
-#include "Messenger.h"

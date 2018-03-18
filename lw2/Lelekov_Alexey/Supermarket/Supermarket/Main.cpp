@@ -11,7 +11,6 @@ int main(int argc, char* argv[])
 	ThreadHandler handler;
 	handler.Add(Executor::ExecuteCashier, &first);
 	handler.Add(Executor::ExecuteCashier, &second);
-	handler.Add(Executor::ExecuteMessenger, &Messenger::GetInstanse);
 
 	vector<shared_ptr<Customer>> customers;
 	for (size_t i = 0; i < customersCount; i++)
@@ -32,7 +31,6 @@ int main(int argc, char* argv[])
 	}
 	first.StopWorking();
 	second.StopWorking();
-	Messenger::GetInstanse().StopWorking();
 	handler.WaitAll();
 	return 0;
 }

@@ -145,7 +145,6 @@
   <ItemGroup>
     <ClInclude Include="Cashier.h" />
     <ClInclude Include="Customer.h" />
-    <ClInclude Include="Messenger.h" />
     <ClInclude Include="Executor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -154,7 +153,6 @@
   <ItemGroup>
     <ClCompile Include="Cashier.cpp" />
     <ClCompile Include="Customer.cpp" />
-    <ClCompile Include="Messenger.cpp" />
     <ClCompile Include="Executor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
