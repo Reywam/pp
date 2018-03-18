@@ -18,5 +18,6 @@ private:
 	HANDLE semaphore;
 	std::queue<std::shared_ptr<Customer>> queue;
 	size_t number;
+	const size_t clientsBufferSize = 10;
 	bool isWorking = true;
 };

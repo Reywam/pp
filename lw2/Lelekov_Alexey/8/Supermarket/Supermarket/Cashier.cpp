@@ -4,7 +4,7 @@
 Cashier::Cashier(const size_t &number)
 {
 	this->number = number;
-	semaphore = CreateSemaphore(NULL, 0, 50, NULL);
+	semaphore = CreateSemaphore(NULL, 0, clientsBufferSize, NULL);
 }
 
 void Cashier::ServeCustomer()
