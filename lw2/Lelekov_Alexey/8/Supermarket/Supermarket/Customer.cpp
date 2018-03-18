@@ -6,7 +6,6 @@ Customer::Customer(const size_t &number)
 	this->number = number;
 	wakeupEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 	exitEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-	ResetEvent(wakeupEvent);
 }
 
 void Customer::Wakeup()
