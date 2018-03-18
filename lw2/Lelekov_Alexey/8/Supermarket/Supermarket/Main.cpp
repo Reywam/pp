@@ -20,6 +20,7 @@ int main(int argc, char* argv[])
 	handler.Add(Executor::ExecuteCashier, &first);
 	handler.Add(Executor::ExecuteCashier, &second);
 
+	srand(time(NULL));
 	vector<shared_ptr<Customer>> customers;
 	for (size_t i = 0; i < customersCount; i++)
 	{

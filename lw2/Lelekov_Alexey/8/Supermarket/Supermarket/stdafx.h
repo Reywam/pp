@@ -7,6 +7,7 @@
 
 #include <Windows.h>
 #include <iostream>
+#include <ctime>
 #include <string>
 #include <memory>
 #include "Customer.h"
