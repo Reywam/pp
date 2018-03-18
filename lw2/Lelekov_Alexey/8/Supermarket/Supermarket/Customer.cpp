@@ -26,7 +26,7 @@ void Customer::WaitOnesTurn()
 	ResetEvent(wakeupEvent);
 }
 
-HANDLE Customer::ExitEvent()
+HANDLE Customer::IsWorkFinished()
 {
 	return exitEvent;
 }
