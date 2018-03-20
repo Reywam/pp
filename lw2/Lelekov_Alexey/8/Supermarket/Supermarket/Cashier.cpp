@@ -9,6 +9,7 @@ Cashier::Cashier(const size_t &number)
 
 void Cashier::ServeCustomer()
 {
+	Sleep(3000);
 	auto &customer = queue.front();
 	customer->Wakeup();
 	std::cout << "Customer No: " + std::to_string(customer->GetNumber()) + " served in cashdesk: " + std::to_string(number) + '\n';

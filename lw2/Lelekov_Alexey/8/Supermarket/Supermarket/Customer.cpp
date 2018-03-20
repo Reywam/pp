@@ -20,6 +20,7 @@ size_t Customer::GetNumber()
 
 void Customer::WaitOnesTurn()
 {
+	Sleep(5000);
 	std::cout << "Customer No: " + std::to_string(number) + " is sleeping now\n";
 	WaitForSingleObject(wakeupEvent, INFINITE);
 	SetEvent(exitEvent);
