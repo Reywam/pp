@@ -3,6 +3,12 @@
 #include "Cashier.h"
 #include <memory>
 
+struct DataForCustomer
+{
+	std::vector<Cashier*> cashiers;
+	Customer* customer;
+};
+
 Executor::Executor()
 {
 }
@@ -16,8 +22,9 @@ DWORD WINAPI Executor::ExecuteCashier(LPVOID parameter)
 
 DWORD WINAPI Executor::ExecuteCustomer(LPVOID parameter)
 {
-	Customer* customer = reinterpret_cast<Customer*>(parameter);;
-	customer->WaitOnesTurn();
+	DataForCustomer* data = reinterpret_cast<DataForCustomer*>(parameter);
+	Customer* customer = data->customer;
+	customer->Action(data->cashiers);
 	return 0;
 }
 

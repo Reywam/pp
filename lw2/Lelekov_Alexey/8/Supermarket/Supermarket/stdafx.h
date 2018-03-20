@@ -9,8 +9,9 @@
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <queue>
 #include <memory>
-#include "Customer.h"
 #include "Cashier.h"
+#include "Customer.h"
 #include "ThreadHandler.h"
 #include "Executor.h"

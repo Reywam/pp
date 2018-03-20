@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Cashier.h"
+#include "Customer.h"
 
 Cashier::Cashier(const size_t &number)
 {
@@ -9,10 +10,12 @@ Cashier::Cashier(const size_t &number)
 
 void Cashier::ServeCustomer()
 {
-	Sleep(3000);
-	auto &customer = queue.front();
+	int sleepTime = 3000 + rand() % 5000;
+	Sleep(sleepTime);
+	auto customer = queue.front();
 	customer->Wakeup();
 	std::cout << "Customer No: " + std::to_string(customer->GetNumber()) + " served in cashdesk: " + std::to_string(number) + '\n';
+	std::cout << "Serving time: " + std::to_string(sleepTime) + "\n\n";
 	WaitForSingleObject(customer->GetExitEvent(), INFINITE);
 	queue.pop();
 }
@@ -24,6 +27,7 @@ size_t Cashier::GetNumber()
 
 void Cashier::ServeCustomers()
 {
+	srand(time(NULL));
 	while (true)
 	{
 		if (!isWorking && queue.empty())
@@ -37,13 +41,12 @@ void Cashier::ServeCustomers()
 		}
 		
 		WaitForSingleObject(semaphore, INFINITE);
-		std::cout << "Cashier No: " + std::to_string(number) + " awekened\n";
 		ServeCustomer();
 	}
 	std::cout << "Cashdesk " + std::to_string(number) + " closed\n";
 }
 
-void Cashier::AddCustomerInQueue(std::shared_ptr<Customer> customer)
+void Cashier::AddCustomerInQueue(Customer* customer)
 {
 	std::string msg = "New customer " + std::to_string(customer->GetNumber()) + " arrived on cashdesk No: " + std::to_string(number) + '\n';
 	std::cout << msg;
