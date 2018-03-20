@@ -25,7 +25,7 @@ void Customer::WaitOnesTurn()
 	SetEvent(exitEvent);
 }
 
-HANDLE Customer::IsWorkFinished()
+HANDLE Customer::GetExitEvent()
 {
 	return exitEvent;
 }

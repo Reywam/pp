@@ -6,7 +6,7 @@ public:
 	void Wakeup();
 	void WaitOnesTurn();
 	size_t GetNumber();
-	HANDLE IsWorkFinished();
+	HANDLE GetExitEvent();
 	~Customer();
 private:
 	size_t number;
