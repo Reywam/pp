@@ -22,6 +22,7 @@ DWORD WINAPI Executor::ExecuteCashier(LPVOID parameter)
 
 DWORD WINAPI Executor::ExecuteCustomer(LPVOID parameter)
 {
+	srand(GetTickCount());
 	DataForCustomer* data = reinterpret_cast<DataForCustomer*>(parameter);
 	Customer* customer = data->customer;
 	customer->Action(data->cashiers);

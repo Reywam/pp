@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Customer.h"
 #include "Cashier.h"
+#include "Randomizer.h"
 #include <memory>
 
 Customer::Customer(const size_t &number)
@@ -22,15 +23,13 @@ size_t Customer::GetNumber()
 
 void Customer::GetInLine(std::vector<Cashier*> cashiers)
 {
-	srand(time(NULL));
 	int cashierNumber = rand() % cashiers.size();
 	cashiers[cashierNumber]->AddCustomerInQueue(this);
 }
 
 void Customer::Action(std::vector<Cashier*> cashiers)
 {
-	int sleepTime = 1000 + rand() % 5000;
-	std::cout << "Sleep for : " + std::to_string(sleepTime) + '\n';
+	int sleepTime = Randomizer::Get(1000, 15000);
 	Sleep(sleepTime);
 	GetInLine(cashiers);
 	WaitOnesTurn();
