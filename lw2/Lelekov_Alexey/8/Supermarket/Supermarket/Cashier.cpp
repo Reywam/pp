@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Cashier.h"
 #include "Customer.h"
+#include "Randomizer.h"
 
 Cashier::Cashier(const size_t &number)
 {
@@ -10,7 +11,7 @@ Cashier::Cashier(const size_t &number)
 
 void Cashier::ServeCustomer()
 {
-	int sleepTime = 3000 + rand() % 5000;
+	int sleepTime = Randomizer::Get(3000, 5000);;
 	Sleep(sleepTime);
 	auto customer = queue.front();
 	customer->Wakeup();
@@ -27,7 +28,6 @@ size_t Cashier::GetNumber()
 
 void Cashier::ServeCustomers()
 {
-	srand(time(NULL));
 	while (true)
 	{
 		if (!isWorking && queue.empty())
