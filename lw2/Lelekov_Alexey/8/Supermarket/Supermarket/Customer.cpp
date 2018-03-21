@@ -23,7 +23,7 @@ size_t Customer::GetNumber()
 
 void Customer::GetInLine(std::vector<Cashier*> cashiers)
 {
-	int cashierNumber = rand() % cashiers.size();
+	int cashierNumber = Randomizer::Get(0, cashiers.size() - 1);
 	cashiers[cashierNumber]->AddCustomerInQueue(this);
 }
 
