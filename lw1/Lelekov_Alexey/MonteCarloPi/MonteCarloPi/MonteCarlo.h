@@ -19,8 +19,9 @@ public:
 	MonteCarlo(const size_t &itersCount);
 	void Run(size_t threadsCount);
 	double GetResult();
+	static size_t GetProgressBorder();
 	~MonteCarlo();
 private:
-	size_t iterCount;
+	static size_t iterCount;
 	double result = 0;
 };
