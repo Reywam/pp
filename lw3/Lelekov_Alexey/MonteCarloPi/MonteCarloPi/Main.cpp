@@ -29,5 +29,6 @@ int main(int argc, char *argv[])
 
 	float duration = (float)(end - start) / CLOCKS_PER_SEC;
 	std::cout << "Time: " << duration << std::endl;
+
     return 0;
 }

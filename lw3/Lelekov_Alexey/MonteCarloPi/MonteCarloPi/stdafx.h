@@ -10,3 +10,4 @@
 #include <time.h>
 #include "MonteCarlo.h"
 #include "Messenger.h"
+#include <omp.h>

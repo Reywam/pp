@@ -23,16 +23,6 @@ void Messenger::PrintHelpMsg(std::ostream &out)
 	PrintMessage(out, helpMessage);
 }
 
-DWORD WINAPI Messenger::PrintProgress(LPVOID param)
-{
-	while (Counter::GetCount() < MonteCarlo::GetProgressBorder())
-	{
-		std::string progress = '\n' + std::to_string(Counter::GetCount()) + " / " + std::to_string(MonteCarlo::GetProgressBorder()) + '\n';
-		std::cout << progress;
-	}
-	return 0;
-}
-
 Messenger::~Messenger()
 {
 }

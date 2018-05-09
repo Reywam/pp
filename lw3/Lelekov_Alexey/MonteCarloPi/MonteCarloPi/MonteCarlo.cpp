@@ -1,40 +1,30 @@
 #include "stdafx.h"
 #include "MonteCarlo.h"
 
-size_t MonteCarlo::iterCount = 0;
+size_t MonteCarlo::points = 0;
 
-DWORD WINAPI GeneratePointsInCircle(LPVOID param)
+void MonteCarlo::GeneratePointsInCircle(const size_t &iterCount)
 {
-	size_t *info = (size_t*)(param);
 	Randomizer rand;
-	const size_t iterCount = *info;
-	for (; Counter::GetCount() < iterCount;)
+	#pragma omp parallel
 	{
-		Counter::IncCount();
-		if (Counter::GetCount() > iterCount)
+		#pragma omp for
+		for (int i = 0; i < iterCount; ++i)
 		{
-			break;
-		}
-
-		Point point = rand.GenerateRandomPoint(SQUARE_SIDE);
-		double x = point.GetX();
-		double y = point.GetY();
-		if (x * x + y * y <= R)
-		{
-			Counter::IncPoint();
+			Point point = rand.GenerateRandomPoint(SQUARE_SIDE);
+			double x = point.GetX();
+			double y = point.GetY();
+			if (x * x + y * y <= R)
+			{
+				InterlockedIncrement(&points);
+			}
 		}
 	}
-	return 0;
-}
-
-size_t MonteCarlo:: GetProgressBorder()
-{
-	return iterCount;
 }
 
 MonteCarlo::MonteCarlo(const size_t &itersCount)
 {
-	if (itersCount >= 0) 
+	if (itersCount >= 0)
 	{
 		iterCount = itersCount;
 	}
@@ -42,8 +32,8 @@ MonteCarlo::MonteCarlo(const size_t &itersCount)
 
 void MonteCarlo::Run()
 {
-	GeneratePointsInCircle(&iterCount);
-	result = MULT_COEFF * Counter::GetPoints() / iterCount;
+	GeneratePointsInCircle(iterCount);
+	result = MULT_COEFF * points / iterCount;
 }
 
 double MonteCarlo::GetResult()
