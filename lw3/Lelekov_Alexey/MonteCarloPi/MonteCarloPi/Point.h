@@ -3,7 +3,7 @@ class Point
 {
 public:
 	Point();
-	Point(double x, double y);
+	Point(const double &x, const double &y);
 	double GetX();
 	double GetY();
 	~Point();
