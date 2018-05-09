@@ -17,7 +17,7 @@ class MonteCarlo
 {
 public:
 	MonteCarlo(const size_t &itersCount);
-	void Run(size_t threadsCount);
+	void Run();
 	double GetResult();
 	static size_t GetProgressBorder();
 	~MonteCarlo();

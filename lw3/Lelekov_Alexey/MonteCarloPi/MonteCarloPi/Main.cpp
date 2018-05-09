@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-const size_t ARGS_COUNT = 3;
+const size_t ARGS_COUNT = 2;
 
 int main(int argc, char *argv[])
 {
@@ -18,12 +18,11 @@ int main(int argc, char *argv[])
 	}
 
 	size_t iterationsCount = atoi(argv[1]);
-	size_t threadsCount = atoi(argv[2]);
 
 	clock_t start = clock();
 	
 	MonteCarlo algorithm(iterationsCount);
-	algorithm.Run(threadsCount);
+	algorithm.Run();
 	std::cout << algorithm.GetResult() << std::endl;
 
 	clock_t end = clock();

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Messenger.h"
 
-const std::string Messenger::helpMessage = "Use MonteCarloPi.exe <iterCount> <threadCount>\n<iterCount>: 0-inf+\n<threadCount>: 1-64.";
+const std::string Messenger::helpMessage = "Use MonteCarloPi.exe <iterCount>\n<iterCount>: 0-inf+\n";
 const std::string Messenger::errorMessage = "Error! Use MonteCarloPi.exe --help for help message.";
 
 Messenger::Messenger()
