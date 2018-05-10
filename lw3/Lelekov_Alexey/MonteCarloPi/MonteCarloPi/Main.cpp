@@ -17,17 +17,17 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	size_t iterationsCount = atoi(argv[1]);
+	const size_t iterationsCount = atoi(argv[1]);
 
-	clock_t start = clock();
+	const clock_t start = clock();
 	
 	MonteCarlo algorithm(iterationsCount);
 	algorithm.Run();
 	std::cout << algorithm.GetResult() << std::endl;
 
-	clock_t end = clock();
+	const clock_t end = clock();
 
-	float duration = (float)(end - start) / CLOCKS_PER_SEC;
+	const float duration = (float)(end - start) / CLOCKS_PER_SEC;
 	std::cout << "Time: " << duration << std::endl;
 
     return 0;
